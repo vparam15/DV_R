@@ -42,7 +42,7 @@ ggplot() +
         position=position_jitter(width=0.3, height=0)
   )
 
-#Chart 3: Age and fare of all data points for which sex is not null.
+#Chart 3: All passengers for which sex is not null, divided by sex and ranked by fare. Dot color indicates survival.
 ggplot() + 
   coord_cartesian() + 
   scale_x_discrete() +
@@ -60,12 +60,12 @@ ggplot() +
         position=position_jitter(width=0.3, height=0)
   )
 
-#Chart 4: Age and fare of all data points for which sex is not null.
+#Chart 4: All passengers for which sex is not null, divided by sex, passenger class, and survival and ranked by fare.
 ggplot() + 
   coord_cartesian() + 
   scale_x_discrete() +
   scale_y_continuous() +
-  facet_grid(PCLASS~SURVIVED) +
+  facet_grid(PCLASS~SURVIVED, labeller = label_both) +
   labs(title='Titanic') +
   labs(x="SURVIVED", y=paste("FARE")) +
   layer(data=subset(df, SEX != 'null'), 
@@ -77,3 +77,39 @@ ggplot() +
         #position=position_identity()
         position=position_jitter(width=0.3, height=0)
   )
+
+#Chart 5: All passengers aged 10 and younger for which sex is not null, divided by sex, passenger class, and survival and ranked by fare.
+ggplot() + 
+  coord_cartesian() + 
+  scale_x_discrete() +
+  scale_y_continuous() +
+  facet_grid(PCLASS~SURVIVED, labeller = label_both) +
+  labs(title='Titanic where age <= 10') +
+  labs(x="SURVIVED", y=paste("FARE")) +
+  layer(data=subset(df, as.numeric(as.character(AGE)) <= 10), 
+        mapping=aes(x=as.character(SEX), y=as.numeric(as.character(FARE)), color=SEX), 
+        stat="identity", 
+        stat_params=list(), 
+        geom="point",
+        geom_params=list(), 
+        #position=position_identity()
+        position=position_jitter(width=0.3, height=0)
+  )
+
+#Chart 6: All passengers for which sex is not null, divided by survival and sex and ordered by fare and age.
+ggplot() + 
+  coord_cartesian() +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  facet_grid(SURVIVED~SEX, labeller = label_both) +
+  labs(title='Survival by age, fare, and sex',x='Age',y='Fare') +
+  layer(data=subset(df, SEX != 'null'),
+        mapping=aes(x=as.numeric(as.character(AGE)),y=as.numeric(as.character(FARE)),color=SEX),
+        stat="identity", 
+        stat_params=list(), 
+        geom="point",
+        geom_params=list(), 
+        #position=position_identity()
+        position=position_jitter(width=0.3, height=0)
+  )
+  
