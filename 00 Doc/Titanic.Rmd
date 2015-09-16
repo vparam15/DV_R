@@ -1,7 +1,7 @@
 ---
 title: "Titanic.Rmd"
-author: "Herbert Gutierrez, Varun Parameswaran, Stan Urbanek"
-date: "September 14, 2015"
+author: "Herbert Gutierrez, Varun Parameswaran"
+date: "September 15, 2015"
 output: html_document
 ---
 
@@ -19,52 +19,55 @@ First we accessed the Oracle database using Dr. Cannata's SQL code and imported 
 Below, we load a couple of packages to generate the summary and first six values of the data frame.
 
 ```{r}
-require(dplyr)
-require(extrafont)
-require(ggplot2)
-require(ggthemes)
-require(gplots)
-require(grid)
-require(jsonlite)
-require(lubridate)
-require(RCurl)
-require(reshape2)
-require(rstudioapi)
-require(tableplot)
-require(tidyr)
-require(jsonlite)
-require(RCurl)
-source("../01 Data/Proj1Script.R", echo = TRUE)
+source("../01 Data/Initialize.R", echo = TRUE)
 ```
 
-Now that you have seen the data, we will discuss the graphs and associated trends we interpreted from them.
-
+Now that you have seen the data, we will discuss the graphs and associated trends we interpreted from them. Each graph, along with the code necessary to generate it, is shown below.
 
 ###Graph 1: Age and fare of all data points, including those for which sex is null.
 
 This graph is our first representation of the raw data. There are a couple of data points for which the "sex" field contains null values.
 
+```{r}
+source("../01 Data/Graph1.R", echo = TRUE)
+```
 
 ###Graph 2: Age and fare of all data points for which sex is not null.
 
 This next graph takes a subset of the data to filter out unusable values (where sex contains null values). This graph is a visual introduction to the data, displaying male and female passengers ranked by fare and age.
 
+```{r}
+source("../01 Data/Graph2.R", echo = TRUE)
+```
 
 ###Graph 3: All passengers for which sex is not null, divided by sex and ranked by fare. Dot color indicates survival.
 
 This next graph shows the survival of the passangers based on sex and fare. Blue points represent those who survived, while red represents passangers who perished. From the graph we can interpret that females were more likely to survive.
 
+```{r}
+source("../01 Data/Graph3.R", echo = TRUE)
+```
 
 ###Graph 4: All passengers for which sex is not null, divided by sex, passenger class, and survival and ranked by fare.
 
 This next graph divides the data even further, by subdividing the passengers into passenger classes 1, 2, and 3. We still see that females were more likely to survive; however, this likelihood was increased if the female was a 1st class passenger. Furthermore, 2nd and 3rd class males were at the greatest risk of not surviving.
 
+```{r}
+source("../01 Data/Graph4.R", echo = TRUE)
+```
 
 ###Graph 5: All passengers aged 10 and younger for which sex is not null, divided by sex, passenger class, and survival and ranked by fare.
 
 This next graph is the same as Graph 1.4, except that it focuses on passengers aged 10 and younger. Here, we see that all 1st and 2nd class passenger children survived except for one. However, 3rd class passenger children were equally likely as not to survive.
 
+```{r}
+source("../01 Data/Graph5.R", echo = TRUE)
+```
 
 ###Graph 6: All passengers for which sex is not null, divided by survival and sex and ordered by fare and age.
 
 The final graph shows the age and fare distribution and survival of male and female passengers. Overall, one can see that males were generally older than females aboard the ship. Survival was least likely for males in the 20-50 age range.
+
+```{r}
+source("../01 Data/Graph6.R", echo = TRUE)
+```
